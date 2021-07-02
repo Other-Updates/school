@@ -1,0 +1,204 @@
+#nav {
+
+}
+#nav, #nav ul {
+    list-style:none;
+    padding:0;
+	margin:0;
+}
+#nav ul {
+    position:relative;
+    z-index:-1;
+}
+#nav li {
+    position:relative;
+    z-index:100;
+}
+#nav ul li {
+    margin-top:-29px;
+    -moz-transition:  0.4s linear 0.1s;
+    -ms-transition: 0.4s linear 0.1s;
+    -o-transition: 0.4s linear 0.1s;
+    -webkit-transition: 0.4s linear 0.1s;
+    transition: 0.4s linear 0.1s;
+}
+#nav li a {
+    background-color:#fff;
+    color:#000;
+    display:block;
+    line-height:28px;
+    outline:0;
+    padding: 3px 0 3px 15px;
+    text-decoration:none;
+	border-top: 1px solid #EEE;
+}
+#nav li ul li a {
+	padding-left:52px;
+}
+#nav li a.sub {
+    background:#fff url("../images/down.png") no-repeat;
+}
+#nav li a + img {
+    cursor:pointer;
+    display:none;
+    height:28px;
+    left:0;
+    position:absolute;
+    top:0;
+    /*width:200px;*/
+}
+#nav li a img {
+    border-width:0px;
+    height:24px;
+    line-height:28px;
+    margin-right:8px;
+    vertical-align:middle;
+    width:24px;
+}
+#nav li a:hover {
+    background-color:#f7f7f7;
+}
+/*#nav li a:hover img {
+-webkit-animation-duration: 1s;
+-moz-animation-duration: 1s;
+-o-animation-duration: 1s;
+animation-duration: 1s;
+-webkit-animation-fill-mode: both;
+-moz-animation-fill-mode: both;
+-o-animation-fill-mode: both;
+animation-fill-mode: both;
+-webkit-backface-visibility: visible!important;
+-webkit-animation-name: flip;
+-moz-backface-visibility: visible!important;
+-moz-animation-name: flip;
+-o-backface-visibility: visible!important;
+-o-animation-name: flip;
+backface-visibility: visible!important;
+animation-name: flip;
+}*/
+#nav ul li a {
+    background-color:#fff;
+    color:#898F9C;
+    line-height:22px;
+}
+#nav ul li a:hover {
+    background-color:#f7f7f7;
+    color:#444;
+}
+#nav ul li a img {
+    background: url("../images/bulb.png") no-repeat;
+    border-width:0px;
+    height:16px;
+    line-height:22px;
+    margin-right:5px;
+    vertical-align:middle;
+    width:16px;
+}
+#nav ul li:nth-child(odd) a img {
+    background:url("../images/bulb2.png") no-repeat;
+}
+#nav a.sub:focus {
+    background:#f7f7f7;
+    outline:0;
+}
+#nav a:focus ~ ul li {
+    margin-top:0;
+
+    -moz-transition:  0.4s linear;
+    -ms-transition: 0.4s linear;
+    -o-transition: 0.4s linears;
+    -webkit-transition: 0.4s linears;
+    transition: 0.4s linear;
+}
+#nav a:focus + img, #nav a:active + img {
+    display:block;
+}
+#nav a.sub:active {
+    background:#bcbdc1;
+    outline:0;
+}
+#nav a:active ~ ul li {
+    margin-top:0;
+}
+#nav ul:hover li {
+    margin-top:0;
+}
+/* Pulse */
+/*@-webkit-keyframes pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+
+@keyframes pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+
+.pulse {
+  display: inline-block;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+#nav li a:hover .pulse
+{
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}*/
+/* Rotate */
+/*.rotate {
+  display: inline-block;
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  transition-duration: 0.8s;
+  -webkit-transition-property: transform;
+  -moz-transition-property: transform;
+  transition-property: transform;
+  /*-webkit-transform: translateZ(0);*/
+  -moz-transform: translateZ(0);
+ /* transform: translateZ(0);*/
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  z-index:0;
+}*/
+/*#nav li a:hover .rotate, #nav li a.rotate:focus, #nav li a.rotate:active {
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(-180deg);
+  -o-transform: rotate(360deg);
+  /*transform: rotate(-360deg);*/
+}*/
+
+/* Grow Rotate */
+.grow-rotate {
+  display: inline-block;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+#nav li a:hover .grow-rotate, #nav li a.grow-rotate:focus, #nav li a.grow-rotate:active {
+  -webkit-transform: scale(1.1) rotate(300deg);
+  transform: scale(1.1) rotate(360deg);
+}

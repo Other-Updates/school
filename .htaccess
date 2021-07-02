@@ -1,0 +1,11 @@
+RewriteEngine on
+#RewriteCond %{REMOTE_ADDR} !^106\.51\.48\.137$
+#RewriteRule ^(.*)$ https://f2fsolutions.co.in/contactus?disallowed=1$1 [R=301,L]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^(demo|scribal)\. [NC]
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php?/0 [PT,L]
+
+

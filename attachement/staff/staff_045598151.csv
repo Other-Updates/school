@@ -1,0 +1,16 @@
+Name,Staff ID,Gender,DOJ,Class,Designation,Staff Type,Email,password,DOB,Mobile,Address,State,Country,Postal Code
+Kavitha,SSid01,Female,20-03-2000,LKG,Teacher,Teaching,kavitha09@gmail.com,1234,17-03-1985,9422 23 6662,"77, Ansari St, Ram Nagar, Coimbatore, Tamil Nadu",Tamil Nadu,India,641009
+Dinesh Kumar,SSid02,Male,20-03-2009,Second Standard,Teacher,Teaching,dineshkumar_t@gmail.com,1234,17-03-1989,8422 24 6888,"Shop No. 93-B, NSR Rd, Opposite To State Bank of Mysore, Saibaba Colony, Coimbatore, Tamil Nadu 641011",Tamil Nadu,India,641011
+Sindhuja,SSid03,Female,20-03-2009,Third Standard,Teacher,Teaching,sindhuja123@gmail.com,1234,17-03-1988,7222 44 6888,"Shop No. 93-B, NSR Rd, Opposite To State Bank of Mysore, Saibaba Colony, Coimbatore, Tamil Nadu 641011",Tamil Nadu,India,641012
+Tharun Kumar,SSid04,Male,20-03-2009,Fourth Standard,Teacher,Teaching,tharun99@gmail.com,1234,17-03-1987,922 437 2965,"Near G.P. Bus Stop 833, 834, Sathy Rd, Gandhipuram, Coimbatore, Tamil Nadu 641012",Tamil Nadu,India,641012
+Kavin ,SSid05,Male,20-03-2008,Fivth Standard,Teacher,Teaching,Kavin99@gmail.com,1234,17-03-1983,73730 44320,"383, 100 Feet Road, Gandhipuram, Coimbatore, Tamil Nadu 641012",Tamil Nadu,India,641012
+Suresh Kumar,SSid06,Male,20-03-2009,Sixth Standard,Teacher,Teaching,sureshkumar123@gmail.com,1234,17-03-1980,9722 264 8888,"334/1A, Mettupalayam Road,, G.N.Mills Bus Stop, Coimbatore, Tamil Nadu 641029",Tamil Nadu,India,641029
+Meenakshi,SSid07,Female,20-03-2011,Seventh Standard,Teacher,Teaching,meenakshi12345@gmail.com,1234,17-03-1981,9722 264 8887,"208, 100 Feet Rd, Gandhipuram, Coimbatore, Tamil Nadu 641002",Tamil Nadu,India,641002
+Kiruba,SSid08,Female,20-03-2014,Eighth Standad,Teacher,Teaching,Kiruba123@gmail.com,1234,17-03-1989,922 252 4388,"Shop No.262, Chinnasamy Naidu road, opp.iyyappan temple, new siddhapudur, Coimbatore, Tamil Nadu 641044",Tamil Nadu,India,641044
+Sathya,SSid09,Female,20-03-2015,Nineth Standard,Teacher,Teaching,sathya00@gmail.com,1234,17-03-1985,922 000 4388,"374, AP Towers, 100 Feet Road, Coimbatore, Tamil Nadu 641012",Tamil Nadu,India,641012
+Milton,SSid10,Male,20-03-2016,Tenth Standard,Teacher,Teaching,Milton55@gmail.com,1234,17-03-1977,073730 48747,"373/D, Trichy Road, Opp to Shanthi Gears,, Singanallur, Coimbatore, Tamil Nadu 641005",Tamil Nadu,India,641005
+Varun,SSid11,Male,20-03-2014,First Standard,Teacher,Teaching,varun99@gmail.com,1234,17-03-1978,7373000009,"TV Swamy Road East, R S Puram, Near Post Office, Coimbatore, Tamil Nadu 641002",Tamil Nadu,India,641002
+midhun,SSid12,Male,20-03-2018,Eleventh Standard,Teacher,Teaching,midhun1234@gmail.com,1234,17-03-1998,9022 25 4087,"No. 150-151, Bharathiyar Rd, NG Narayanasamy St, New Siddhapudur, Coimbatore, Tamil Nadu 641044",Tamil Nadu`,India,641044
+Karthiga,SSid13,Female,20-03-2017,Twelveth,Teacher,Teaching,Karthiga123@gmail.com,1234,17-03-1998,93677 22558,"483 asoka plaza,, Doctor Nanjappa Road, Gandipuram , Near Central Bus Stand, Coimbatore, Tamil Nadu 641018",Tamil Nadu`,India,641018
+Uthra,SSid14,Female,20-03-2009,LKG,Teacher,Teaching,Uthra1234@gmail.com,1234,17-03-1990,9360002558,"100 Feet Road, Coimbatore, Tamil Nadu 641012",Tamil Nadu`,India,641018
+Anand ,SSid15,Male,20-03-2008,UKG,Teacher,Teaching,anand1234@gmail.com,1234,17-03-1991,9922 249 4799,"Bashyakarlu Rd, R.S. Puram, Coimbatore, Tamil Nadu 641002",Tamil Nadu,India,641002

@@ -1,0 +1,267 @@
+/* RESET & BASICS STYLES
+================================================== */
+	html{
+		width: 100%;
+		height: 100%;
+	}
+	
+	body{
+		font-family: 'Lato', sans-serif;
+		background: #fff;
+		color:#fff; 
+		width: 100%; 
+		height: 100%;
+		margin: 0;
+	}
+
+	
+	img{
+		border-style: none;
+		vertical-align: top;
+		max-width: 100%;
+	}
+
+	i{
+		font-weight: normal;
+		color: #7c4e95;
+	}
+	
+	 p{
+		font-size: 15px;
+		line-height: 14px;
+		color: #fff;
+		margin: 5px 0 11px 0;
+		font-weight: 100;
+		text-align: center;
+	}
+	address{
+		padding:0;
+		margin:0;
+		font-style:normal;
+	}
+	a{
+		color: #000;
+		font-family: 'Lato', sans-serif;
+		font-size: 14px;
+		text-decoration: none;
+	}
+	a:hover{
+		text-decoration: none;
+	}
+	
+/* LINKS
+================================================== */
+
+
+/* TYPOGRAPHY
+================================================== */
+
+	h1, h2, h3, h4, h5, h6{
+		margin: 0;
+		padding: 0;
+	}
+	
+/* HEADER WITH LOGO
+================================================== */
+	.header_block{
+		text-align: center;
+		margin-bottom: 15px;
+	}
+
+
+/* MAIN CONTENT
+================================================== */
+
+	.wrapper{
+		width:100%; 
+		height:100%; 
+		display: table;
+		vertical-align: middle; 
+	}
+	
+	
+	
+/*------- background color change  -----------*/
+	.background-change{
+		background-color: #058dce;
+	}
+	
+	.background-change-color{
+		color: #058dce;
+	}
+	
+	
+/*---------------------------------------*/
+	.background-light{
+		background:#fff;
+	}
+
+	.col-lg-block-themeshark-dark{
+		display: table-cell;
+		vertical-align: middle; 
+		position: relative;
+		background-image: url(../images/bg2.png); 
+		background-repeat: no-repeat;
+		background-position: right;
+		width: 50%;
+	}
+	
+	.col-lg-block-themeshark-light{
+		color: #000; 
+		box-sizing: border-box; 
+		display: table-cell;
+		vertical-align: middle; 
+		width: 50%;
+	}
+	.col-lg-block-themeshark-light h1{
+		font-family: 'Lato', sans-serif;
+		font-size: 60px;
+		line-height: 72px;
+		margin-bottom: 30px;
+		text-transform: uppercase;
+		padding-top: 89px;
+	}
+
+/* ANIMATE
+================================================== */	
+	.animated {
+		-webkit-animation-duration: 2.5s;
+		-moz-animation-duration: 2.5s;
+		-o-animation-duration: 2.5s;
+		animation-duration: 2.5s;
+		-webkit-animation-fill-mode: both;
+		-moz-animation-fill-mode: both;
+		-o-animation-fill-mode: both;
+		animation-fill-mode: both;
+	}
+	
+/* START MODAL PANEL FOLLOW US	
+================================================== */
+
+	.clg_logo a
+	{
+		position: relative;
+	}
+
+	.clg_logo a span {
+			width: auto;
+			height: auto;
+			line-height: 20px;
+			padding: 10px;
+			left: 40%;
+			margin-left: -62px;
+			font-size: 14px;
+			color: #fff;
+			text-align: center;
+			background: #058dce;
+			text-indent: 0px;
+			position: absolute;
+			bottom: -25px;
+			opacity: 0;
+			visibility: visible;
+			pointer-events: none;
+			-webkit-transform: translate(-35px) rotate(-25deg) scale(.5);
+			-moz-transform: translate(-35px) rotate(-25deg) scale(.5);
+			-o-transform: translate(-35px) rotate(-25deg) scale(.5);
+			-ms-transform: translate(-35px) rotate(-25deg) scale(.5);
+			transform: translate(-35px) rotate(-25deg) scale(.5);
+			-webkit-transition: all 0.3s ease-in-out;
+			-moz-transition: all 0.3s ease-in-out;
+			-o-transition: all 0.3s ease-in-out;
+			-ms-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+			border-radius: 3px;
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+	}
+	
+	.clg_logo a span:after {
+		top: 100%;
+		left: 50%;
+		border: solid rgba(0, 0, 0, 0);
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		margin-top: 0;
+		pointer-events: none;
+	}
+	
+	.clg_logo a span:after {
+		border-top-color: #058dce;
+		border-width: 7px;
+		margin-left: -5px;
+	}
+		
+	.clg_logo a:hover span {
+		visibility: visible;
+		opacity: 1;
+		-webkit-transform: translate(0px) rotate(0deg) scale(1);
+		-moz-transform: translate(0px) rotate(0deg) scale(1);
+		-o-transform: translate(0px) rotate(0deg) scale(1);
+		-ms-transform: translate(0px) rotate(0deg) scale(1);
+		transform: translate(0px) rotate(0deg) scale(1);
+		}
+
+.clg_logo img:hover{ opacity:0.8;}
+
+/*==================================================
+	MEDIA QUERIES
+==================================================*/
+
+	@media (max-width: 979px) and (min-width: 768px){
+		.wrapper{
+			display: block;
+		}
+		.col-lg-block-themeshark-dark{
+			display: block;
+			padding: 20px;
+			background-image: none;
+			width: auto;
+			margin: 0;
+		}
+		.col-lg-block-themeshark-light{
+			display: block;
+			text-align: center;
+			width: auto;
+			margin: 0;
+		}
+	}
+	
+	@media (max-width: 768px) and (min-width: 480px){
+		.wrapper{
+			display: block;
+		}
+		.col-lg-block-themeshark-dark{
+			display: block;
+			padding: 20px;
+			background-image: none;
+			width: auto;
+			margin: 0;
+		}
+		.col-lg-block-themeshark-light{
+			display: block;
+			text-align: center;
+			width: auto;
+			margin: 0;
+		}	
+	}
+
+	@media (max-width: 480px){
+		.wrapper{
+			display: block;
+		}
+		.col-lg-block-themeshark-dark{
+			display: block;
+			padding: 20px;
+			background-image: none;
+			width: auto;
+			margin: 0;
+		}
+		.col-lg-block-themeshark-light{
+			display: block;
+			text-align: center;
+			width: auto;
+			margin: 0;
+		}
+	}

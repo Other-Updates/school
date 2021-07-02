@@ -1,0 +1,6 @@
+Name,Staff ID,Gender,DOJ,Class,Designation,Staff Type,Email,password,DOB,Mobile,Address,State,Country,Postal Code
+priya,3344,Female,20-03-2000,LKG,Teacher,Teaching,priya@gmail.com,1234,17-03-1995,78855252,test,xxx,xxxx,566622
+darshini,2122,Female,20-03-2000,UKG,Teacher,Teaching,priya@gmail.com,1234,17-03-1995,78855252,test,xxx,xxxx,3232
+Kavitha,SSid01,Female,20-03-2000,LKG,Teacher,Teaching,kavitha09@gmail.com,1234,17-03-1985,9422 23 6662,"77, Ansari St, Ram Nagar, Coimbatore, Tamil Nadu",Tamil Nadu,India,641009
+Dinesh Kumar,SSid02,Male,20-03-1999,Second Standard,Teacher,Teaching,dineshkumar_t@gmail.com,1234,17-03-1989,8422 24 6888,"Shop No. 93-B, NSR Rd, Opposite To State Bank of Mysore, Saibaba Colony, Coimbatore, Tamil Nadu 641011",Tamil Nadu,India,641011
+Sindhuja,SSid03,Female,20-03-1999,Third Standard,Teacher,Teaching,sindhuja123@gmail.com,1234,17-03-1988,7222 44 6888,"Shop No. 93-B, NSR Rd, Opposite To State Bank of Mysore, Saibaba Colony, Coimbatore, Tamil Nadu 641011",Tamil Nadu,India,

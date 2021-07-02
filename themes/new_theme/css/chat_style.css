@@ -1,0 +1,7 @@
+#vpb_bottom_notification_wrapper{width:295px;position:fixed;bottom:0px;right:1px;z-index:99999;background:#FFF;border:solid 1px #cbcbcb;background-color:#FFF;box-shadow:0 0 10px #cbcbcb;-moz-box-shadow:0 0 10px #cbcbcb;-webkit-border-radius:6px 6px 0px 0px;-moz-border-radius:6px 6px 0px 0px;border-radius:6px 6px 0px 0px;padding:0px;display:none;}
+#vpb_bottom_notification_header_wrapper{color:white;background:#058DCE url(../icons/downgreen.gif) no-repeat 5px 5px;margin-bottom:0;text-transform:none;padding:10px 0px 10px 10px;-webkit-border-radius:6px 0px 0px 0px;-moz-border-radius:6px 0px 0px 0px;border-radius:6px 0px 0px 0px; font-weight:bold;}
+#vpb_bottom_notification_close{width:20px;float:right;text-align:center;margin-right:5px;border:0px solid #FFF;padding:0px;padding-bottom:2px;color:#fff;}
+#vpb_bottom_notification_close:hover{border:0px solid #FFF;background:#007DB9;color:#FFF;cursor:pointer;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;}
+#vpb_bottom_notification_contents{padding:10px;color:#000;text-align:left;line-height:20px; max-height:500px; overflow-y: auto}
+
+#vpb_bottom_notification_header_wrapperDefault{width:60px;height:60px;position:fixed;bottom:1px;right:0px;z-index:99999;background:url(../img/notificationvasplus.png) no-repeat 4px 4px;padding:4px;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;cursor:pointer;display:none;}

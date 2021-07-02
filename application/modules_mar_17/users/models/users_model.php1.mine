@@ -1,0 +1,641 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+/**
+ * Users
+ *
+ * This model represents user authentication data. It operates the following tables:
+ * - user account data,
+ * - user profiles
+ *
+ * @package	Tank_auth
+ * @author	Ilya Konyukhov (http://konyukhov.com/soft/)
+ */
+class Users_model extends CI_Model
+{
+	private $table_name		= 'users';			// user accounts
+	private $table_name1	='time_table';
+   	private $table_name2	= 'time_table_details';	
+	private $table_name3	='other_time_tables';
+   	private $table_name4	= 'other_time_table_details';	
+	private $table_name5	= 'internal';	
+	private $table_name6    ='assignment';
+	private $table_name7    ='assignment_details';
+	private $table_name8	= 'student';	
+	private $tabe_name6    ='semester';
+	private $tabe_name7    ='subject_details';
+	private $tabe_name8    ='staff';
+	private $tabe_name9    ='notes';
+	private $tabe_name10    ='events';
+	private $table_name11	= 'internal_details';	
+	
+	function __construct()
+	{
+		parent::__construct();
+
+		$ci =& get_instance();
+	}
+	function get_all_details_by_id($batch,$depart_id,$group_id,$sem_id)
+	{
+		$this->db->where('batch_id', $batch);
+		$this->db->where('depart_id', $depart_id);
+		$this->db->where('group_id', $group_id);
+		$this->db->where('semester_id', $sem_id);	
+	 
+		$query = $this->db->get($this->table_name1)->result_array();
+		
+		foreach($query as $val)
+		{
+			$this->db->select($this->table_name2.'.*');
+			$this->db->select('subject_details.subject_name');
+			$this->db->where('time_table_id', $val['id']);
+			$this->db->join('subject_details','subject_details.id='.$this->table_name2.'.supject_id');	
+			$query[0]['time_info']=$this->db->get($this->table_name2)->result_array();
+		}
+		return $query;
+	}
+	function get_all_details_by_id1($batch,$depart_id,$group_id)
+	{
+		$this->db->where('batch_id', $batch);
+		$this->db->where('depart_id', $depart_id);
+		$this->db->where('group_id', $group_id);
+		$this->db->select('*,MAX(semester_id)');	 
+		$query = $this->db->get($this->table_name1)->result_array();
+		foreach($query as $val)
+		{
+			$this->db->select($this->table_name2.'.*');
+			$this->db->select('subject_details.subject_name');
+			$this->db->where('time_table_id', $val['id']);
+			$this->db->join('subject_details','subject_details.id='.$this->table_name2.'.supject_id');	
+			$query[0]['time_info']=$this->db->get($this->table_name2)->result_array();
+		}
+		return $query;
+	}
+	function get_latest_internal_by_id($batch,$depart_id,$group_id,$type)
+	{
+		$this->db->where('batch_id', $batch);
+		$this->db->where('depart_id', $depart_id);
+		$this->db->where('group_id', $group_id);
+		$this->db->where('time_table_method', $type);
+		$this->db->select('*,MAX(semester_id),MAX(time_table_type)');	 
+		$query = $this->db->get($this->table_name3)->result_array();
+		foreach($query as $val)
+		{
+			$this->db->select($this->table_name4.'.*');
+			$this->db->select('subject_details.subject_name');
+			$this->db->where('other_time_table_id', $val['id']);
+			$this->db->join('subject_details','subject_details.id='.$this->table_name4.'.subject_id');	
+			$query[0]['time_info']=$this->db->get($this->table_name4)->result_array();
+		}
+		return $query;
+	}
+	function get_all_semester_by_id($batch,$depart_id,$group_id)
+	{
+		$this->db->select('semester.id,semester');
+		$this->db->where('batch_id', $batch);
+		$this->db->where('depart_id', $depart_id);
+		$this->db->where('group_id', $group_id);
+		$this->db->join('semester','semester.id='.$this->table_name1.'.semester_id');	
+		$query = $this->db->get($this->table_name1)->result_array();
+		return $query;
+	}
+	function get_created_sem_by_id($batch,$depart_id,$group_id,$type)
+	{
+		$this->db->select('semester.id,semester');
+		$this->db->where('batch_id', $batch);
+		$this->db->where('depart_id', $depart_id);
+		$this->db->where('group_id', $group_id);
+		$this->db->where('time_table_method', $type);
+		$this->db->select('MAX(other_time_tables.semester_id),MAX(other_time_tables.time_table_type)');	
+		$this->db->join('semester','semester.id='.$this->table_name3.'.semester_id');	
+		$query = $this->db->get($this->table_name3)->result_array();
+		return $query;
+	}
+	function get_created_sem_by_id1($batch,$depart_id,$group_id)
+	{
+		$this->db->select('semester.id,semester.semester');
+		$this->db->where('batch_id', $batch);
+		$this->db->where('depart_id', $depart_id);
+		$this->db->where('group_id', $group_id);
+		$this->db->group_by($this->table_name5.'.semester');
+		$this->db->join('semester','semester.id='.$this->table_name5.'.semester');	
+		$query = $this->db->get($this->table_name5)->result_array();
+		return $query;
+	}
+	function get_subject_by_sem_id($batch,$depart_id,$group_id,$sem_id)
+	{
+		$this->db->select('subject_details.id,subject_details.subject_name');
+		$this->db->where($this->table_name5.'.batch_id', $batch);
+		$this->db->where($this->table_name5.'.depart_id', $depart_id);
+		$this->db->where($this->table_name5.'.group_id', $group_id);
+		$this->db->where($this->table_name5.'.semester', $sem_id);
+		$this->db->join('subject_details','subject_details.id='.$this->table_name5.'.subject_id');	
+		$query = $this->db->get($this->table_name5)->result_array();
+		return $query;
+	}
+	function get_internal_by_std_id($where,$std_id)
+	{
+		$this->db->select($this->table_name5.'.*');
+		$this->db->select('internal_details.*');
+		$this->db->select('subject_details.subject_name');
+		$this->db->select('semester.semester');
+		$this->db->where($where);
+		$this->db->where('internal_details.std_id',$std_id);
+		$this->db->join('subject_details','subject_details.id='.$this->table_name5.'.subject_id');
+		$this->db->join('semester','semester.id='.$this->table_name5.'.semester');
+		$this->db->join('internal_details','internal_details.internal_id='.$this->table_name5.'.id');		
+		$query = $this->db->get($this->table_name5)->result_array();
+		return $query;
+	}
+	function get_internal_by_std_id_onload($where,$std_id)
+	{
+		$this->db->select($this->table_name5.'.*');
+		$this->db->select('internal_details.*');
+		$this->db->select('subject_details.subject_name');
+		$this->db->select('semester.semester');
+		$this->db->where($where);
+		$this->db->where('internal_details.std_id',$std_id);
+		$this->db->select('MAX(internal.semester)');	
+		$this->db->join('subject_details','subject_details.id='.$this->table_name5.'.subject_id');
+		$this->db->join('semester','semester.id='.$this->table_name5.'.semester');
+		$this->db->join('internal_details','internal_details.internal_id='.$this->table_name5.'.id');		
+		$query = $this->db->get($this->table_name5)->result_array();
+		return $query;
+	}
+	
+	function get_student_subject($where)
+	{
+		
+			$this->db->select('*');
+			//$this->db->join('assignment','assignment.subject_id=subject_details.id');
+  			$this->db->where($where);
+			$this->db->join('assignment','assignment.subject_id=subject_details.id');
+			$query=$this->db->get('subject_details')->result_array();	
+		   
+		    return $query;
+		
+		
+	}
+	function get_student_assignment_number($where)
+	{
+		$this->db->select('*');
+		$this->db->where($where);
+				
+	$query = $this->db->get('assignment')->result_array();
+		return $query;
+	}
+	// by subject id
+	function get_assignment_byid($where)
+	{
+		$this->db->select('*');
+  		$this->db->where($where);
+			 	
+			$query=$this->db->get('assignment')->result_array();
+			$i=0;
+			foreach($query as $row)
+			{
+				 $this->db->select('group.group');
+				 $this->db->where('id',$row['group_id']);
+				 $query[$i]['group']=$this->db->get('group')->result_array();
+				 $this->db->select('department.department');
+				 $this->db->where('id',$row['depart_id']);
+				 $query[$i]['department']=$this->db->get('department')->result_array(); 
+			  
+			 $i++; 
+				
+			}
+		
+		  /*echo "<pre>";
+		print_r($query);
+		exit;*/
+		  return $query;
+	}
+	function get_assignment_by_id($id)
+	{
+				 
+		$this->db->select($this->table_name6.'.*');
+		  $this->db->select('batch.from,batch.to');
+		  $this->db->select('staff.staff_name');
+		  $this->db->select('subject_details.subject_name');
+		  $this->db->select('semester.semester');
+		  $this->db->select('department.department');
+		  $this->db->where($this->table_name6.'.status',0);
+		  $this->db->where($this->table_name6.'.id',$id);
+		  
+		  $this->db->join('batch','batch.id='.$this->table_name6.'.batch_id');
+		  $this->db->join('staff','staff.id='.$this->table_name6.'.staff_id');
+		  $this->db->join('subject_details','subject_details.id='.$this->table_name6.'.subject_id');
+		  $this->db->join('semester','semester.id='.$this->table_name6.'.semester_id');
+		  $this->db->join('department','department.id='.$this->table_name6.'.depart_id');
+		 
+		  $query = $this->db->get($this->table_name6)->result_array();
+		   $i=0;
+		  foreach($query as $row)
+		  {
+			  
+			  
+				 $this->db->select('group.group');
+				 $this->db->where('id',$row['group_id']);
+				 $query[$i]['group']=$this->db->get('group')->result_array(); 
+			  
+			 $i++; 
+		  }
+		  return $query;
+	}
+	function insert_student_assignment($data)
+	{
+		if ($this->db->insert($this->table_name7, $data)) {
+			$history_id = $this->db->insert_id();
+			
+			return array('id' => $history_id);
+		}
+		return false;
+	}
+	function assignment_details_table($student_id,$ass_id)
+	{
+		$this->db->select('*');
+		$this->db->where('std_id',$student_id);
+		$this->db->where('assign_id',$ass_id);
+		$query=$this->db->get('assignment_details');
+		
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}
+		return false;
+	}
+	//profile
+	
+	function get_all_student_details($id)
+	{
+		$this->db->select($this->table_name8.'.*');
+		$this->db->select('batch.from,batch.to');
+		$this->db->select('department.department');
+		$this->db->select('student_group.depart_id as std_depart_id');
+		$this->db->select('student_group.group_id as std_group_id');
+		$this->db->select('student_details.*');
+		$this->db->where($this->table_name8.'.df',0);		
+		//$this->db->where($this->table_name.'.status',1);
+		$this->db->where($this->table_name8.'.id',$id);
+		$this->db->join('batch','batch.id='.$this->table_name8.'.batch_id');	
+		$this->db->join('student_group','student_group.student_id='.$this->table_name8.'.id');		
+		$this->db->join('department','department.id=student_group.depart_id');	 
+		$this->db->join('student_details','student_details.student_id='.$this->table_name8.'.id');	
+		 		 
+		$query = $this->db->get($this->table_name8)->result_array();
+		$i=0;
+		foreach($query as $val)
+		{
+			$this->db->select('group.group');
+			$this->db->where('id',$val['std_group_id']);	
+			$this->db->where('depart_id',$val['std_depart_id']);
+			$query[$i]['std_group']=$this->db->get('group')->result_array();
+			$this->db->where('qualification.type','student');
+			$this->db->where('qualification.person_id',$val['student_id']);
+			$q_array=$this->db->get('qualification')->result_array();
+			$query['qualification'][0]=$q_array;	
+			$i++;
+		}
+		
+		/*echo "<pre>";
+		print_r($query);
+		exit;*/
+		return $query;
+	}
+	
+	function update_student_profile($data,$id)
+	{
+		$this->db->where('id', $id);
+			
+			if ($this->db->update($this->table_name8, $data)) {
+				
+				return true;
+			}
+			return false;
+	}
+	function get_image_details($id)
+	{
+			$this->db->select('image,cover_image,background_image');
+			$this->db->where('id',$id);
+			$query = $this->db->get('student')->result_array();
+			return $query;
+	}
+	
+	function get_semester($value)
+	{
+		$this->db->select($this->tabe_name6.'.*');
+		foreach($value as $key=>$val)
+		{
+  			 $batch_id=$val["batch_id"];
+			 $depart_id=$val["depart_id"];
+			 $std_id=$val["std_id"];
+			 $group_id=$val["group_id"];
+		}
+		$this->db->where('depart_id',$depart_id);
+		$this->db->where('batch_id',$batch_id);
+		$this->db->where('group_id',$group_id);
+		$this->db->join('semester','semester.id='.$this->tabe_name7.'.semester_id');
+		$this->db->group_by($this->tabe_name7.'.semester_id');
+		
+		$query = $this->db->get('subject_details');
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}
+		return false;
+	}
+	
+	function get_curent_subject($value, $s_id)
+	{
+		foreach($value as $key=>$val)
+		{
+  			 $batch_id=$val["batch_id"];
+			 $depart_id=$val["depart_id"];
+			 
+		}
+		
+		$this->db->select('staff.staff_name');
+		$this->db->select('batch.from,batch.to');
+		$this->db->select('department.department');
+		$this->db->select($this->tabe_name7.'.subject_name');
+		$this->db->select($this->tabe_name7.'.scode');
+		$this->db->where($this->tabe_name7.'.semester_id',$s_id);
+		$this->db->where($this->tabe_name7.'.depart_id',$depart_id);
+		$this->db->where($this->tabe_name7.'.batch_id',$batch_id);
+		$this->db->join('staff','staff.id='.$this->tabe_name7.'.staff_id');
+		$this->db->join('batch','batch.id='.$this->tabe_name7.'.batch_id');	
+		$this->db->join('department','department.id='.$this->tabe_name7.'.depart_id');
+		$query = $this->db->get($this->tabe_name7);
+		
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}
+		return false;
+		
+	}
+	
+	
+	
+	function get_semester_id($value)
+	{
+		
+		foreach($value as $key=>$val)
+		{
+  			 $batch_id=$val["batch_id"];
+			 $depart_id=$val["depart_id"];
+			 $group_id=$val["group_id"];
+		}
+		
+		//$this->db->select($this->tabe_name7.'.*');
+		$this->db->select($this->tabe_name7.'.semester_id');
+		$this->db->group_by($this->tabe_name7.'.semester_id');
+		$this->db->select_max('semester_id');
+		$this->db->where($this->tabe_name7.'.group_id',$group_id);
+		$this->db->where($this->tabe_name7.'.depart_id',$depart_id);
+		$this->db->where($this->tabe_name7.'.batch_id',$batch_id);
+		$query = $this->db->get($this->tabe_name7)->result_array();
+		return $query;
+		
+	}
+
+	
+	
+	function get_subject($sem_id,$value)
+	{
+		foreach($value as $key=>$val)
+		{
+  			 $batch_id=$val["batch_id"];
+			 $depart_id=$val["depart_id"];
+			 $std_id=$val["std_id"];
+		}
+		$this->db->select($this->tabe_name7.'.subject_name');
+		$this->db->select('batch.from,batch.to');
+		$this->db->select('department.department');
+		$this->db->select('staff.staff_name');
+		$this->db->select($this->tabe_name7.'.subject_name');
+		$this->db->select($this->tabe_name7.'.scode');
+		$this->db->where($this->tabe_name7.'.depart_id',$depart_id);
+		$this->db->where($this->tabe_name7.'.batch_id',$batch_id);
+		$this->db->where($this->tabe_name7.'.semester_id',$sem_id);
+		$this->db->join('staff','staff.id='.$this->tabe_name7.'.staff_id');
+		$this->db->join('batch','batch.id='.$this->tabe_name7.'.batch_id');
+		$this->db->join('department','department.id='.$this->tabe_name7.'.depart_id');	
+		$query = $this->db->get($this->tabe_name7);
+		
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}
+		return false;
+	}
+	
+	function get_notes_subject($value)
+	{
+		foreach($value as $key=>$val)
+		{
+  			 $batch_id=$val["batch_id"];
+			 $depart_id=$val["depart_id"];
+			 $group_id=$val["group_id"];
+		}
+		$this->db->select($this->tabe_name7.'.subject_name');
+		$this->db->select($this->tabe_name7.'.id');
+		$this->db->where($this->tabe_name7.'.depart_id',$depart_id);
+		$this->db->where($this->tabe_name7.'.batch_id',$batch_id);
+		$this->db->where($this->tabe_name7.'.group_id',$group_id);
+		$query = $this->db->get($this->tabe_name7);
+		
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	function share_notes_view($value)
+	{
+		foreach($value as $key=>$val)
+		{
+  			 $batch_id=$val["batch_id"];
+			 $depart_id=$val["depart_id"];
+			 $group_id=$val["group_id"];
+		}
+		$this->db->select($this->tabe_name9.'.*');
+		$this->db->select('subject_details.subject_name');
+		$this->db->where($this->tabe_name9.'.df',0);
+		$this->db->where($this->tabe_name9.'.depart_id',$depart_id);
+		$this->db->where($this->tabe_name9.'.batch',$batch_id);
+		$this->db->where($this->tabe_name9.'.group_id',$group_id);
+		$this->db->join('subject_details','subject_details.id='.$this->tabe_name9.'.subject_id');
+		$query = $this->db->get($this->tabe_name9);
+		
+		if ($query->num_rows() > 0) {
+			return $query->result_array();
+		}
+		return false;
+	}
+	function get_notes_by_subject($sub_id)
+	{
+		
+		$this->db->select($this->tabe_name9.'.*');
+		$this->db->select('subject_details.subject_name');
+		$this->db->where($this->tabe_name9.'.df',0);
+		$this->db->where($this->tabe_name9.'.subject_id',$sub_id);
+		$this->db->join('subject_details','subject_details.id='.$this->tabe_name9.'.subject_id');
+		$query = $this->db->get($this->tabe_name9)->result_array();
+		
+		return $query;
+	}
+	
+	
+	function attendance_list($stud_det) //THIS IS FOR ATTENDANCE REPORT FOR STUDENTS 
+	{		
+		$query['stud_details'] = $stud_det;
+		
+		$this->db->order_by('attendance.date','desc');
+		$this->db->select('*');	
+		$query['day_list'] = $this->db->get('attendance')->result_array();	
+		return $query;
+	}
+	function attendance_dashbord($stud_det)  
+	{	
+				
+		$this->db->group_by('attendance.semester_id');
+		$this->db->where('attendance_stud_deta.std_id',$stud_det[0]['id']);
+		$query['stud_det'] = $stud_det;
+		$this->db->select('attendance.semester_id,attendance_stud_deta.attend_id,semester.semester');
+		$this->db->join('attendance_stud_deta','attendance.id = attendance_stud_deta.attend_id');
+		$this->db->join('semester','attendance.semester_id = semester.id');
+		$query['day_list'] = $this->db->get('attendance')->result_array();	
+		
+			
+		/*echo $this->db->last_query();
+		echo "<pre>";
+		print_r($query['day_list']);
+		exit;*/
+		return $query;
+		
+	}
+	
+	
+	function get_events($value)
+	{
+		foreach($value as $key=>$val)
+		{
+			 $depart_id=$val["depart_id"];
+			 $batch_id=$val["batch_id"];
+		}
+		$this->db->select('batch.from,batch.to');
+		$this->db->select('department.department');
+		$this->db->select($this->tabe_name10.'.*');
+		$this->db->where($this->tabe_name10.'.depart_id',$depart_id);
+		$this->db->where($this->tabe_name10.'.batch_id',$batch_id);
+		$this->db->join('department','department.id='.$this->tabe_name10.'.depart_id');
+		$this->db->join('batch','batch.id='.$this->tabe_name10.'.batch_id');
+		$query = $this->db->get($this->tabe_name10)->result_array();
+		/*echo "<pre>";
+		print_r($query);
+		exit;*/
+					return $query;
+			
+	function view_events($id)
+	{
+		$this->db->select($this->table_name10.'.*');
+		$this->db->where($this->table_name10.'.id',$id);
+		$this->db->select('batch.from,batch.to');
+		$this->db->select('department.department');
+		$this->db->join('department','department.id='.$this->table_name10.'.depart_id');
+		$this->db->join('batch','batch.id='.$this->table_name10.'.batch_id');
+		$query = $this->db->get($this->table_name10)->result_array();
+		/*echo "<pre>";
+		print_r($query);
+		exit;*/
+		 return $query;
+		}
+
+		
+	
+	
+	}
+	
+	 /*chat*/
+	 
+	  function getstudentUsers($batch,$depart,$group,$conditions=array(),$fields='')
+	 {
+
+		if(count($conditions)>0)		
+	 	$this->db->where($conditions);
+		$this->db->from('student');
+		$this->db->order_by("student.online_status", "asc");
+	
+		if($fields!='')
+				$this->db->select($fields);
+		else 		
+	 		$this->db->select('student.id,student.name,student.image,student.email_id,student.online_status');
+		
+		$result = $this->db->get();
+		
+		
+	return $result;
+	
+		
+	
+		
+
+      }
+	  
+	 function get_semester_for_student()
+	 {
+		  $this->db->select('*');
+		  $this->db->join('assignment','assignment.semester_id=semester.id');
+		  $query = $this->db->get('semester')->result_array();
+		  /*echo "<pre>";
+		print_r($query);
+		exit;*/
+		  return $query;
+	 }
+	 function get_semester_percentage($data,$data1)
+	 {
+		 $this->db->select('sum(internal_details.total) as sem_type');
+		 $this->db->select('semester.semester,semester.id as sem_id');
+		 $this->db->where($data);
+		 $this->db->group_by('internal.semester');
+		 $this->db->order_by('internal.semester','desc');
+		 $this->db->where('internal_details.std_id',$this->user_auth->get_user_id());
+		 $this->db->join('internal_details','internal_details.internal_id=internal.id');
+		 $this->db->join('semester','semester.id=internal.semester');
+		 $query = $this->db->get($this->table_name5)->result_array();
+		 $i=0;
+		 foreach($query as $val)
+		 {
+			  $this->db->where($data1);
+			  $this->db->where('subject_details.semester_id',$val['sem_id']);
+			  $query[$i]['subject_count'] = $this->db->get('subject_details')->num_rows();
+			  $i++;
+		 }
+		 return $query;
+	 }
+	 function get_semester_max($data)
+	 {
+		 $this->db->select('max(internal.semester) as max_sem_id');
+		 $this->db->where($data);
+		 $this->db->where('internal_details.std_id',$this->user_auth->get_user_id());
+		 $this->db->join('internal_details','internal_details.internal_id=internal.id');
+		 $query = $this->db->get($this->table_name5)->result_array();
+		 return $query;
+	 }
+	  function get_all_time_table_for_calendar($data)
+	 {
+		 $this->db->select($this->table_name3.'.time_table_method,time_table_type');
+		 $this->db->select('other_time_table_details.date,time_in,time_out');
+		 $this->db->select('subject_details.subject_name');
+		 $this->db->where($data);
+		 $this->db->join('other_time_table_details','other_time_table_details.other_time_table_id='.$this->table_name3.'.id');
+		 $this->db->join('subject_details','subject_details.id=other_time_table_details.subject_id');
+		 $query = $this->db->get($this->table_name3)->result_array();
+		 return $query;
+	 }
+	
+	
+	
+}
+/* End of file users.php */
+/* Location: ./application/models/auth/users.php */

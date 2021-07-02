@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>PHP Social Network</title>
+	<style type="text/css" media="screen">
+	body { 
+		font-family: 'Segoe UI', Tahoma, Arial, Verdana, sans-serif; 
+		font-size: 14px; 
+		background: #e8ebed; 
+		color: #000; 
+	}
+	h1 { color: #666;
+		font-family: "Segoe UI", Tahoma, Arial, Verdana, sans-serif;
+		font-weight: normal;
+	}
+	h2 {
+		color: #666;
+		font-family: "Segoe UI", Tahoma, Arial, Verdana, sans-serif; 
+		font-weight: normal;
+	}
+	h3 {
+		color: #222;
+		font-family: "Segoe UI", Tahoma, Arial, Verdana, sans-serif; 
+		font-weight: normal;
+		margin: 0 0 10px 0;
+	}
+	p, table, hr, .box { margin-bottom:25px; }
+	.box p { margin-bottom:10px; }
+	a { color: #4c66a4;}
+	a:hover { color: #1e346a;}
+	.row-body {
+		border-bottom: 0;
+		margin: 0 auto;
+		width: 920px;
+		overflow: auto;
+	}
+	.message-container {
+		padding: 0 20px 10px 10px;
+	}
+	.message-form-content {
+		box-shadow: 0px 1px 1px #CCC;
+		border: 1px solid #BFBFBF;
+		background: #FFF;
+		color: #6B6B6B;
+		border-radius: 3px;
+		overflow: auto;
+	}
+	.message-inner {
+		padding: 10px;
+	}
+	.divider {
+		height: 1px;
+		width: 100%;
+		background: #DEE0E3;
+		float: left;
+	}
+	.logo {
+		background: url('logo.png');
+		width: 185px;
+		height: 45px;
+		float: left;
+		margin: 0 15px 5px 0;
+	}
+	.doc-menu {
+		width: 660px;
+		float: right;
+		margin: 10px 0;
+		text-align: right;
+	}
+	.doc-menu a {
+		font-family: 'Segoe UI', Tahoma, Arial, Verdana, sans-serif;
+		font-weight: bold;
+		margin-right: 20px;
+		color: #4c66a4;
+		text-decoration: none;
+	}
+	.doc-menu a:hover {
+		color: #1e346a;
+	}
+	.about {
+		text-align: right;
+		padding: 10px 0;
+		float: left;
+		width: 850px;
+	}
+	.thank-you {
+		margin: 10px;
+		background: #DFDFDF;
+		color: #5A5A5A;
+		overflow: auto;
+		float: left;
+		width: 838px;
+		padding: 10px;
+		font-weight: bold;
+	}
+	.inner-inner {
+		padding: 0 10px;
+	}
+	.developers-color {
+		color: #4C72D6;
+	}
+	</style>
+</head>
+
+<body id="top">
+	<div class="row-body">
+		<div class="message-container">
+			<div class="message-form-content">
+				<div class="message-inner">
+					<a href="http://pricop.info" target="_blank"><div class="logo"></div></a>
+					<div class="doc-menu"><a href="#preparing">Preparing</a> <a href="#installation">Installation</a> <a href="#">Configuration</a> <a href="#faq">Faq</a> <a href="#developers">Developers</a></div>
+				</div>
+				<div class="divider"></div>
+				<div class="message-inner">
+					<div class="about">Documentation by <a href="http://pricop.info" target="_blank">Pricop Alexandru</a></div>
+				</div>
+				<div class="divider"></div>
+					<div class="thank-you">Thank you for purchasing <a href="http://phpdolphin.com" target="_blank">phpDolphin</a> software. If you have any questions that are beyond the scope of this documentation, please feel free to contact me trough <a href="http://codecanyon.net/user/Pricop#contact" target="_blank">this form</a>.</div>
+				<div class="divider"></div>
+				<div class="message-inner">
+				
+					<h2 id="toc" class="alt">Table of Contents</h2>
+					<ol class="alpha">
+						<li><a href="#preparing">Preparing...</a></li>
+						<li><a href="#installation">Installation process...</a></li>
+						<li><a href="#configuration">Configuration process...</a></li>
+						<li><a href="#faq">FAQ...</a></li>
+						<li><a href="#developers">Developers...</a></li>
+					</ol>
+					
+				</div>
+				<div class="divider"></div>
+				<div class="message-inner">
+					
+					<h3 id="preparing"><strong>1. Preparing</strong> - <a href="#top">top</a></h3>
+					Make sure you have the following:
+					<strong>
+						<ol>
+							<li>PHP 5.3+</li>
+							<li>MySQLi Extension</li>
+							<li>GD Library</li>
+						</ol>
+					</strong>
+
+				</div>
+				<div class="divider"></div>
+				<div class="message-inner">
+
+					<h3 id="installation"><strong>2. Installation Process</strong> - <a href="#top">top</a></h3>
+					<ol>
+						<li>
+							Import the <strong>phpDolphin.SQL</strong> file from the "MySQL" folder into your MySQL database using the import function available in MySQL.
+						<li>
+							With a text editor open the following file located inside the 'Script/includes/' folder: <strong>config.php</strong>, and replace what's between the brackets (e.g: 'YOURDBNAME') with your MySQL settings:
+							<pre>
+	$CONF['user'] = 'YOURDBUSER';
+	$CONF['pass'] = 'YOURDBPASS';
+	$CONF['name'] = 'YOURDBNAME';
+	$CONF['url'] = 'http://yourdomain.com';
+	$CONF['email'] = 'notifications@yourdomain.com';
+	</pre>
+						</li>
+						<li>
+							Upload the files from the "Script" folder on the FTP server (usually <strong>public_html</strong> folder when installing it on a domain).
+						</li>
+						<li>
+							Set the <strong>CHMOD</strong> to 777 or 775 (depending on the server configuration) to the following folders: <strong>'cache'</strong>, <strong>'uploads'</strong> and its subfolders: <strong>'avatars', 'covers', 'media'</strong>.
+						</li>
+					</ol>
+				
+				</div>
+				<div class="divider"></div>
+				<div class="message-inner">
+					
+					<h3 id="configure"><strong>3. Configuration</strong> - <a href="#top">top</a></h3>
+
+					The default username for the Admin is "<strong>admin</strong>", and the password is "<strong>pricop2008@yahoo.com</strong>" without quotes (the admin panel link is located in footer).<br /><br />
+					
+					<div class="inner-inner">
+						<li><strong>General Settings</strong></li>
+						Allows you to change various settings about the website and limitations.<br /><br />
+						
+						
+						<li><strong>Users Settings</strong><br /></li>
+						Allows you to change various settings about user accounts and features, and predefined settings for them to be enabled or disabled.<br /><br />
+						
+						<li><strong>Themes</strong><br /></li>
+						Allows you to change the whole website layout, the current theme enabled is marked <span style="color: #3e7b1a;"><strong>Active</strong></span>.<br /><br />
+						
+						<li><strong>Statistics</strong><br /></li>
+						Advanced user and site statistics (User Registrations, Messages, Comments, Reports, Likes) with charts.<br /><br />
+						
+						<li><strong>Password</strong><br /></li>
+						It's the page where you can change the Admin password.<br /><br />
+						
+						<li><strong>Manage Users</strong><br /></li>
+						Allows you to edit users (or a certain user) and make them <span style="color: #3e7b1a;"><strong>Verified</strong></span>, change their basic settings and delete them.<br /><br />
+						
+						<li><strong>Manage Reports</strong><br /></li>
+						Allows you to manage the reported Messages and Comments, you can mark them as <strong>Safe</strong> (they can't be reported again), or <strong>delete</strong> them.<br /><br />
+						
+						<li><strong>Manage Ads</strong><br /></li>
+						Allows you to add Advertisments in certain places on the website.<br /><br />
+					</div>
+				</div>
+				<div class="divider"></div>
+				<div class="message-inner">
+				
+					<h3 id="faq"><strong>4. FAQ</strong> - <a href="#top">top</a></h3>
+					
+					<ol>
+					<li><strong>Q:</strong> I want to modify a text or something about the design...<br />
+					<strong>A:</strong> You can change anything visual from the theme located in: /themes/theme-name</li>
+					<li><strong>Q:</strong> I want to add a new language to the script.<br />
+					<strong>A:</strong> Make a copy of the original 'english.php' file into the 'languages' folder, renameit into your language and then translate it.</li>
+					<li><strong>Q:</strong> I want to change the content of the Privacy Policy, Contact, Disclaimer and/or ToS page.<br />
+					<strong>A:</strong> Open themes/theme-name/page/ and open the .html file you want to edit, save & upload, that's it.</li>
+					<li><strong>Q:</strong> I have problems/questions related to the script, how can I contact you...<br />
+					<strong>A:</strong> If you want a live chat, you can add me on Facebook: http://facebook.com/pricop.alexandru, or via the following contact form: <a href="http://codecanyon.net/user/Pricop#contact" target="_blank">http://codecanyon.net/user/Pricop#contact</a>, pricop2008@yahoo.com
+					</ol>
+				
+				</div>
+				<div class="divider"></div>
+				<div class="message-inner">
+				
+					<h3 id="developers"><strong>5. Developers</strong> - <a href="#top">top</a></h3>
+					As a developer, the only mandatory requirement is a valid phpDolphin license key.
+					<strong><h2 class="developers-color">Themes</h2></strong>
+					<strong>The theme folder must contain the following:</strong><br />
+					
+					<ul>
+						<li>info.php [contains theme details such as Author, Version, etc]</li>
+						<li>icon.png [the theme icon]</li>
+						<li>the rest of the required theme files are located in the default theme called 'dolphin'.</li>
+					</ul>
+					
+					<strong>Recommendations</strong>:
+					<ul>
+						<li>Theme's folder name should not contain any white spaces</li>
+						<li>Edit the original 'dolphin' theme, as it contains all the strings and files required.</li>
+					</ul>
+					<strong><h2 class="developers-color">Plugins</h2></strong>
+					<strong>Currently the plug-in module is in development.</strong>
+				</div>
+				<div class="divider"></div>
+				<div class="message-inner">
+					
+					Copyright &copy; 2013 - 2014 <a href="http://phpdolphin.com" target="_blank">phpDolphin</a>. All rights reserved.<br />
+					A product by <a href="http://pricop.info" target="_blank">Pricop Alexandru Mihai</a>.
+					<span style="float: right"><a href="#toc">Go To Table of Contents</a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

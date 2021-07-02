@@ -1,0 +1,15 @@
+@media print
+{
+.cover-container, .fc-header-left, fc-header-right, .user_print_use, .footer, .fg_logo, .topbar_margin, .row-body topbar, .row-offcanvas, .main_bg, .topbar{ display:none;}
+.row-body .nine{ width:100%;}
+.message-form-content{box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);}
+.message-form-header, .page-header{ color:#000;}
+.print_header{ display:block;}
+.my_table_style table, td, th{box-shadow: inset 0px 0px 0px #FFF;}
+#container1{ height:200px;}
+.message-container{ padding:0;}
+.fc-header-title{ text-align:left;}
+.header{ display:none;}
+}
+@page {margin: 0.8cm;}
+
